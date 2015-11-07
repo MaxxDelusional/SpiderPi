@@ -16,12 +16,10 @@ class _Getch:
         return ch
 
 def forward():
-    try:
-        GPIO.output((LEFT_PIN, RIGHT_PIN), True)
-    except Exception as ex:
-        print type(ex)
-        print ex.args
-        print ex    
+    # GPIO.output((LEFT_PIN, RIGHT_PIN), True)
+    GPIO.output(LEFT_PIN, True)
+    GPIO.output(RIGHT_PIN, False)
+
 def left():
     GPIO.output(LEFT_PIN, True)
     GPIO.output(RIGHT_PIN, False)
@@ -32,6 +30,12 @@ def right():
 
 def stop():
     GPIO.output((LEFT_PIN, RIGHT_PIN), False)
+
+def leftOn():
+    GPIO.output(LEFT_PIN, True)
+
+def rightOn():
+    GPIO.output(RIGHT_PIN, True)
 
 def get():
     inkey = _Getch()
@@ -47,6 +51,10 @@ def get():
         right()
     elif k == 's':
         stop()
+    elif k == 'o':
+        leftOn()
+    elif k == 'p':
+        rightOn()
     else:
         return False
 
