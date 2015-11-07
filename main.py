@@ -16,7 +16,7 @@ def get():
                 k=inkey()
                 if k!='':break
 
-        print 'you pressed', ord(k)
+        # print 'you pressed', ord(k)
         if k=='\x1b[A':
                 print "up"
         elif k=='\x1b[B':
@@ -29,7 +29,7 @@ def get():
                 print "not an arrow key!"
 
 def main():
-        for i in range(0,20):
+        while True:
                 get()
 
 if __name__=='__main__':
