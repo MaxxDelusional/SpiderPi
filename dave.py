@@ -2,18 +2,15 @@ import pygame
 
 pygame.init()
 
-clock = pygame.time.Clock()
-run = True
+# to spam the pygame.KEYDOWN event every 100ms while key being pressed
+pygame.key.set_repeat(100, 100)
 
-while run:
-
+while 1:
     for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == KEYDOWN:
-            print "Key Down"
-            if event.key == K_LEFT:
-                print "You pressed Left"
-
-    clock.tick(60)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                print 'go forward'
+            if event.key == pygame.K_s:
+                print 'go backward'
+        if event.type == pygame.KEYUP:
+            print 'stop'
