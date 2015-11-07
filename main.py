@@ -15,6 +15,8 @@ def get():
         while(1):
                 k=inkey()
                 if k!='':break
+
+        print 'you pressed', ord(k)
         if k=='\x1b[A':
                 print "up"
         elif k=='\x1b[B':
