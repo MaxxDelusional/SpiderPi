@@ -32,16 +32,23 @@ def get():
                 print "left"
                 GPIO.output(16, False)
         else:
-                print "not an arrow key!"
-                return
+                return False
+        return True
 
 def main():
+        print "Hello Spider"
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(26, GPIO.OUT)
         GPIO.setup(16, GPIO.OUT)
         
-        while True:
-                get()
+        
+        while get():
+            print "Still Running"
+
+
+        print "Exiting"
+
+        
 
 if __name__=='__main__':
         main()
