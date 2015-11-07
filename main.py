@@ -1,54 +1,67 @@
 import sys,tty,termios
 import RPi.GPIO as GPIO
 
+LEFT_PIN = 26
+RIGHT_PIN = 16
+
 class _Getch:
     def __call__(self):
-            fd = sys.stdin.fileno()
-            old_settings = termios.tcgetattr(fd)
-            try:
-                tty.setraw(sys.stdin.fileno())
-                ch = sys.stdin.read(3)
-            finally:
-                termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-            return ch
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+
+def forward():
+    GPIO.output(LEFT_PIN, True)
+    GPIO.output(RIGHT_PIN, True)
+
+def left():
+    GPIO.output(LEFT_PIN, True)
+    GPIO.output(RIGHT_PIN, False)
+
+def right():
+    GPIO.output(LEFT_PIN, False)
+    GPIO.output(RIGHT_PIN, True)
+
+def stop():
+    GPIO.output(LEFT_PIN, False)
+    GPIO.output(RIGHT_PIN, False)
 
 def get():
-        inkey = _Getch()
-        while(1):
-                k=inkey()
-                if k!='':break
+    inkey = _Getch()
+    while(1):
+        k=inkey()
+        if k!='':break
 
-        # print 'you pressed', ord(k)
-        if k=='\x1b[A':
-                print "up"
-                GPIO.output(26, True)
-        elif k=='\x1b[B':
-                print "down"
-                GPIO.output(26, False)
-        elif k=='\x1b[C':
-                print "right"
-                GPIO.output(16, True)
-        elif k=='\x1b[D':
-                print "left"
-                GPIO.output(16, False)
-        else:
-                return False
-        return True
+    if k == 'w':
+        forward()
+    elif k == 'a':
+        left()
+    elif k == 'd':
+        right()
+    elif k == 's':
+        stop()
+    else:
+        return False
+
+    return True
 
 def main():
-        print "Hello Spider"
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(26, GPIO.OUT)
-        GPIO.setup(16, GPIO.OUT)
-        
-        
-        while get():
-            print "Still Running"
+    print "Hello Spider"
+    
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(26, GPIO.OUT)
+    GPIO.setup(16, GPIO.OUT)
 
+    while get():
+        print "Still Running"
 
-        print "Exiting"
-
-        
+    print "Exiting"
+    GPIO.cleanup()
 
 if __name__=='__main__':
         main()
