@@ -16,8 +16,12 @@ class _Getch:
         return ch
 
 def forward():
-    GPIO.output((LEFT_PIN, RIGHT_PIN), True)
-
+    try
+        GPIO.output((LEFT_PIN, RIGHT_PIN), True)
+    except Exception as ex:
+        print type(ex)
+        print ex.args
+        print ex    
 def left():
     GPIO.output(LEFT_PIN, True)
     GPIO.output(RIGHT_PIN, False)
