@@ -16,8 +16,7 @@ class _Getch:
         return ch
 
 def forward():
-    GPIO.output(LEFT_PIN, True)
-    GPIO.output(RIGHT_PIN, True)
+    GPIO.output((LEFT_PIN, RIGHT_PIN), True)
 
 def left():
     GPIO.output(LEFT_PIN, True)
@@ -28,8 +27,7 @@ def right():
     GPIO.output(RIGHT_PIN, True)
 
 def stop():
-    GPIO.output(LEFT_PIN, False)
-    GPIO.output(RIGHT_PIN, False)
+    GPIO.output((LEFT_PIN, RIGHT_PIN), False)
 
 def get():
     inkey = _Getch()
@@ -52,7 +50,7 @@ def get():
 
 def main():
     print "Hello Spider"
-    
+
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(26, GPIO.OUT)
     GPIO.setup(16, GPIO.OUT)
@@ -64,4 +62,4 @@ def main():
     GPIO.cleanup()
 
 if __name__=='__main__':
-        main()
+    main()
