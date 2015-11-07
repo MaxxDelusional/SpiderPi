@@ -33,6 +33,7 @@ def get():
                 GPIO.output(16, False)
         else:
                 print "not an arrow key!"
+                return
 
 def main():
         GPIO.setmode(GPIO.BCM)
