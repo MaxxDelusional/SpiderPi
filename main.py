@@ -1,4 +1,4 @@
-import sys,tty,termios
+import sys,tty,termios,time
 import RPi.GPIO as GPIO
 
 LEFT_PIN = 26
