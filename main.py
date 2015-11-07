@@ -17,7 +17,7 @@ class _Getch:
 
 def forward():
     GPIO.output(LEFT_PIN, True)
-    time.sleep(1)
+    time.sleep(0.1)
     GPIO.output(RIGHT_PIN, True)
 
 def left():
